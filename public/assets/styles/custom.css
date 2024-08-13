@@ -1,0 +1,77 @@
+.top1 {
+    background-color: #FFD501;
+    color: rgb(14, 12, 12);
+}
+
+.top2 {
+    background-color: #C0C0C0;
+    color: rgb(14, 12, 12);
+}
+
+.top3 {
+    background-color: #CD7F32;
+    color: rgb(14, 12, 12);
+}
+
+.text-silver {
+    color: #C0C0C0
+}
+
+.text-bronze {
+    color: #CD7F32
+}
+
+.box-content.bronze {
+    border-color: #CD7F32;
+}
+
+.box-content.silver {
+    border-color: #C0C0C0;
+}
+
+.bak {
+    background: url(https://c.tenor.com/v35v-zbtwnUAAAAi/confetti.gif) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.meta {
+    color: rgb(23, 24, 70);
+}
+.meta2 {
+    color: rgb(23, 24, 70);
+}
+.meta3 {
+    color: rgb(23, 24, 70);
+}
+
+.back-green{
+    background-color: #00bf4f;
+}
+
+.bg-10{
+    color: #ffffff;
+    background-color: #00bf4f;
+    font-size: 14px;
+    text-align: center;
+}
+.bg-5{
+    color: #ffffff;
+    background-color: #ffa000;
+    text-align: center;
+
+}
+.bg-0{
+    color: #ffffff;
+    background-color: #ea4335;
+    text-align: center;
+
+}
+.bg-meta{
+    background-color: #dbf5e6;
+}
+.bg-venta{
+    background-color: #E3F2FD;
+}
+.bg-mt2{
+    background-color: #FFF3E0;
+}
