@@ -1,10 +1,21 @@
 <?php
 
 $url_Cargar_Consultas = constant('URL') . 'reportes/Cargar_Consultas/';
+$url_Generar_pdf = constant('URL') . 'reportes/Generar_pdf/';
 
+
+$SO = PHP_OS;
+if ($SO  == "Linux") {
+    $directorio_archivo = "/api/docs/";
+} else {
+    $directorio_archivo = "/credito_express_api/docs/";
+}
 ?>
 <script>
     var url_Cargar_Consultas = '<?php echo $url_Cargar_Consultas ?>';
+    var url_Generar_pdf = '<?php echo $url_Generar_pdf ?>';
+
+    var directorio_archivo = '<?php echo $directorio_archivo ?>';
 
 
     function Cargar_Consultas() {
@@ -62,11 +73,16 @@ $url_Cargar_Consultas = constant('URL') . 'reportes/Cargar_Consultas/';
                     data: "archivo",
                     title: "terminos",
                     className: "btn_terminos",
-                    render: function(x) {
+                    render: function(x, y, r) {
                         if (x != null) {
-                            x = "<a target='_blank' href='" + directorio_archivo + x + "'><i class='fa fa-file-pdf-o fs-1 text-danger'></i></a>"
+                            if (!r.existe) {
+                                x = '<a class="text-success">GENERAR</a>';
+                            } else {
+                                x = "<a target='_blank' href='" + directorio_archivo + x + "'><i class='fa fa-file-pdf-o fs-1 text-danger'></i></a>"
+                            }
+
                         } else {
-                            x = '<a>GENERAR</a>';
+                            x = '<a class="text-success">GENERAR</a>';
                         }
                         return x;
                     }
@@ -86,21 +102,34 @@ $url_Cargar_Consultas = constant('URL') . 'reportes/Cargar_Consultas/';
         $('#Tabla_reporte tbody').on('click', 'td.btn_terminos', function(e) {
             var data = table.row(this).data();
             console.log('data: ', data);
-            if (data["archivo"] == null) {
+            if (data["archivo"] == null || data["existe"] == false) {
 
                 let param = {
-                    cedula: data["cedula"],
-                    nombre_cliente: data["nombre_cliente"],
-                    fecha_creado: moment(data["fecha_creado"]).format("YYYYMMDDhhmmss"),
-                    ip: data["ip"],
+                    id_unico: data.id_unico,
+                    ip: data.ip,
+                    fecha: data.fecha_consulta,
+                    datos: JSON.parse(data.datos)
                 }
+                console.log('param: ', param);
 
                 AjaxSendReceiveData(url_Generar_pdf, param, function(x) {
                     console.log('x: ', x);
-                    if (x == 1) {
-                        Cargar_reporte();
-                    }
+                    Cargar_Consultas();
                 })
+            }
+        });
+    }
+
+    function Valisar_Archivo() {
+        $.ajax({
+            url: archivoUrl,
+            type: 'HEAD',
+            success: function(data, textStatus, xhr) {
+                console.log('Código de estados:', xhr.status);
+                return x = "<a target='_blank' href='" + directorio_archivo + x + "'><i class='fa fa-file-pdf-o fs-1 text-danger'></i></a>" // Debería imprimir 200 si el archivo existe
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log('Código de estado:', xhr.status); // Debería imprimir 404 si el archivo no existe
             }
         });
     }

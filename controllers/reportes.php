@@ -21,4 +21,10 @@ class Reportes extends Controller
         $array = json_decode(file_get_contents("php://input"), true);
         $function = $this->model->Cargar_Consultas($array);
     }
+
+    function Generar_pdf()
+    {
+        $array = json_decode(file_get_contents("php://input"), true);
+        $function = $this->model->Generar_pdf($array);
+    }
 }
