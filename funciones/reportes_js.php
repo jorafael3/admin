@@ -108,7 +108,10 @@ if ($SO  == "Linux") {
                     id_unico: data.id_unico,
                     ip: data.ip,
                     fecha: data.fecha_consulta,
-                    datos: JSON.parse(data.datos)
+                    datos: JSON.parse(data.datos),
+                    cedula: data.cedula,
+                    numero: data.numero,
+
                 }
                 console.log('param: ', param);
 

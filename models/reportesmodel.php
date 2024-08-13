@@ -71,9 +71,17 @@ class ReportesModel extends Model
         $ID_UNICO = $param["id_unico"];
         $ip = $param["ip"];
         $fechaConsulta = $param["fecha"];
+        $cedula = $param["cedula"];
 
-        $cedula = $API["SOCIODEMOGRAFICO"][0]["IDENTIFICACION"];
-        $nombre = $API["SOCIODEMOGRAFICO"][0]["NOMBRE"];
+
+        if (count($API) > 0) {
+            $cedula = $API["SOCIODEMOGRAFICO"][0]["IDENTIFICACION"];
+            $nombre = $API["SOCIODEMOGRAFICO"][0]["NOMBRE"];
+        } else {
+            $cedula = $param["cedula"];
+            $nombre  = "";
+        }
+
 
         // $fechaConsulta = new Date();
         $pdf = new FPDF('P', 'mm', 'A4');
